@@ -4,9 +4,9 @@ var ReactDOM = require('react-dom');
 var HelloWorld = React.createClass({
   render: function(){
      return(
-       <div>Hello</div>
+       <div>Hello {this.props.name}</div>
      )
   }
 })
 
-ReactDOM.render(<HelloWorld />, document.getElementById('root'));
+ReactDOM.render(<HelloWorld name="Maeve"/>, document.getElementById('root'));
