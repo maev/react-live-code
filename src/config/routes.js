@@ -12,8 +12,8 @@ var Home = require('../components/Home');
 var routes = (
   <Router history={browserHistory}>
     <Route path='/' component={Main}>
-       <Route path='playerOne' component= {PromptContainer} />
-       <Route path='playerTwo/:playerOne' component= {PromptContainer} />
+       <Route path='playerOne' component={PromptContainer} />
+       <Route path='playerTwo/:playerOne' component={PromptContainer} />
       <IndexRoute component={Home}/>
     </Route>
   </Router>
