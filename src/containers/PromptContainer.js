@@ -2,6 +2,10 @@ var React = require('react');
 var transparentBg = require('../styles').transparentBg;
 
 var PromptContainer=React.createClass({
+contextTypes: {
+  router: React.PropTypes.object.isRequired
+},
+
  getInitialState: function(){
    return{
      username:''
@@ -9,16 +13,39 @@ var PromptContainer=React.createClass({
  },
 onUpdateUser: function(e){
   this.setState({
-
     username: e.target.value
   })
 },
+
+ onSubmitUser: function(e){
+   e.preventDefault();
+   this.setState({
+     username:''
+   })
+
+   // if got to /battle?playerOne=xxx&playerTwo=xxx
+   if(this.props.routeParams.playerOne){
+           this.context.router.push({
+             pathname: '/battle',
+             query:{
+               playerOne: this.props.routeParams.playerOne,
+               playerTwo: this.state.username
+             }
+           })
+
+     //else go to /playerOne
+   }else{
+     this.context.router.push('/playerTwo/' + this.state.username)
+   }
+
+ },
+
   render: function(){
     return(
       <div style={transparentBg} className="jumbotron col-sm-6 col-sm-offset-3 text-center">
       <h1>{this.props.route.header}</h1>
       <div className="col-sm-12">
-        <form>
+        <form onSubmit={this.onSubmitUser}>
           <div className="form-group">
             <input
               type="text"
