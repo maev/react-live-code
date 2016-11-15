@@ -1,5 +1,6 @@
 var React = require('react');
 var transparentBg = require('../styles').transparentBg;
+var Prompt = require('../components/Prompt');
 
 var PromptContainer=React.createClass({
 contextTypes: {
@@ -29,9 +30,9 @@ onUpdateUser: function(e){
              pathname: '/battle',
              query:{
                playerOne: this.props.routeParams.playerOne,
-               playerTwo: this.state.username
+               playerTwo: this.state.username,
              }
-           })
+           });
 
      //else go to /playerOne
    }else{
@@ -42,28 +43,13 @@ onUpdateUser: function(e){
 
   render: function(){
     return(
-      <div style={transparentBg} className="jumbotron col-sm-6 col-sm-offset-3 text-center">
-      <h1>{this.props.route.header}</h1>
-      <div className="col-sm-12">
-        <form onSubmit={this.onSubmitUser}>
-          <div className="form-group">
-            <input
-              type="text"
-              className="form-control"
-              value={this.state.username}
-              onChange={this.onUpdateUser}
-              placeholder="Github Username"/>
-          </div>
-          <div className="form-group col-sm-3 col-sm-offset-4">
-            <button
-              className="btn btn-block btn-success"
-              type="submit">
-              Continue
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+      <Prompt
+      onSubmitUser={this.onSubmitUser}
+      onUpdateUser={this.onUpdateUser}
+      header={this.props.route.header}
+      username={this.state.username}
+         />
+
     )
   }
 })
